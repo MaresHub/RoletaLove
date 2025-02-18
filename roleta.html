@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roleta</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="love.jpg" type="image/png">
+</head>
+<body>
+    <h1 style="position: absolute; 
+    top: 20px; font-family: sans-serif; 
+    color: white;">
+    Roleta Do Amor</h1>
+
+    <button id="giro">Girar</button>
+    <div class="container">
+        <div class="um">Não!</div>
+        <div class="dois">Sem chance!</div>
+        <div class="tres">Não aceito!</div>
+        <div class="quatro">Nem morta!</div>
+        <div class="cinco">Aceito namorar contigo!</div>
+        <div class="seis">Nem por 1 milhão!</div>
+        <div class="sete">Friendzone!</div>
+        <div class="oito">Apenas amigos!</div>
+    </div>
+
+    <div id="mensagemBox" class="hidden">
+        <div class="mensagemContent"></div>
+        <button id="fecharMensagem">Fechar</button>
+    </div>
+    
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                seuNome: params.get('seuNome') || 'Você',
+                nomeCrush: params.get('nomeCrush') || 'Seu Amor'
+            };
+        }
+    
+        let container = document.querySelector(".container");
+        let btn = document.getElementById("giro");
+        let mensagemBox = document.getElementById("mensagemBox");
+        let mensagemContent = document.querySelector(".mensagemContent");
+        let fecharMensagem = document.getElementById("fecharMensagem");
+        const { seuNome, nomeCrush } = getQueryParams();
+    
+        btn.onclick = function () {
+            btn.disabled = true;
+            mensagemBox.style.display = "none"; 
+    
+            const anguloCinco = 180; // "Aceito namorar contigo"
+            const giroExtra = 360 * (Math.floor(Math.random() * 5) + 5);
+            const anguloFinal = anguloCinco + giroExtra;
+    
+            container.style.transition = "transform 5s ease-out"; 
+            container.style.transform = "rotate(" + anguloFinal + "deg)";
+    
+            setTimeout(() => {
+                container.style.transition = "none";
+                container.style.transform = "rotate(" + (anguloCinco % 360) + "deg)"; 
+                
+                setTimeout(() => {
+                    mensagemContent.innerText = `Parabéns ${nomeCrush}! Você aceitou namorar com ${seuNome}! ❤️`;
+                    mensagemBox.style.display = "flex"; 
+    
+                    let synth = window.speechSynthesis;
+                    let utterance = new SpeechSynthesisUtterance(mensagemContent.innerText);
+                    synth.speak(utterance);
+                }, 300);
+                
+                btn.disabled = false;
+            }, 5000);
+        }
+    
+        fecharMensagem.onclick = function () {
+            mensagemBox.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

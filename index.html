@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome Do Seu Love</title>
+    <link rel="icon" href="love.jpg" type="image/png">
+    <style>
+        body {
+            margin: 0; 
+            padding: 0; 
+            height: 100vh; 
+            background: linear-gradient(135deg, #ffcccb, #ff6699); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 10px; 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+            text-align: center; 
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #ff6666;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #ff6666;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #ff4d4d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Digite o seu nome e o nome do seu amor ❤️</h1>
+        <form id="form" onsubmit="return enviarFormulario();">
+            <input type="text" id="seuNome" name="seuNome" placeholder="Seu nome" required>
+            <input type="text" id="nomeCrush" name="nomeCrush" placeholder="Nome da pessoa" required>
+            <br>
+            <button type="submit">Continuar</button>
+        </form>
+    </div>
+
+    <script>
+        function enviarFormulario() {
+            const seuNome = document.getElementById('seuNome').value;
+            const nomeCrush = document.getElementById('nomeCrush').value;
+            window.location.href = `roleta.html?seuNome=${encodeURIComponent(seuNome)}&nomeCrush=${encodeURIComponent(nomeCrush)}`;
+            return false; 
+        }
+    </script>
+</body>
+</html>
